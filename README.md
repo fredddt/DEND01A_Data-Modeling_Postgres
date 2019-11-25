@@ -1,4 +1,4 @@
-# 1. Data Modeling with PostgresSQL
+# Data Modeling with PostgresSQL
 
 #### #PostgresSQL, #Python, #Psycopg2
 In this first project the following concepts and techniques are put into practice:
@@ -39,4 +39,4 @@ To transfer data from the song- and log files to the DB do the following:
 1. **Run the `create_tables.py` script** -  this will create new tables and drop existing ones.
 2. **Run `etl.py`** -which will iterate over all song- and log-data files and insert them in your sparkifydb using the star schema described above.
 
-To test if everything has worked and the data has been inserted into the database the Jupyter-Notebook `test.ipynb`c can be used.
+To test if everything has worked and the data has been inserted into the database the Jupyter-Notebook `test.ipynb` can be used.
