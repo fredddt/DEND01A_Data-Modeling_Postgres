@@ -10,7 +10,7 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 songplay_table_create = ("""CREATE TABLE IF NOT EXISTS songplays (
                                 songplay_id varchar PRIMARY KEY, 
-                                start_time int, 
+                                start_time timestamp, 
                                 user_id varchar, 
                                 level varchar, 
                                 song_id varchar, 
@@ -56,7 +56,10 @@ time_table_create = ("""CREATE TABLE IF NOT EXISTS time (
 
 # INSERT RECORDS
 
-songplay_table_insert = ("""
+
+songplay_table_insert = ("""INSERT INTO songplays (songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent)
+                                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                                ON CONFLICT(songplay_id) DO NOTHING;
 """)
 
 user_table_insert = ("""INSERT INTO users (user_id, first_name, last_name, gender, level) 
@@ -80,11 +83,18 @@ time_table_insert = ("""INSERT INTO time (start_time, hour, day, week, month, ye
                                 ON CONFLICT (start_time) DO NOTHING
 """)
 
-# 'ts', 'hour', 'day', 'week', 'month', 'year', 'weekday'
-
+# Implement the song_select query in sql_queries.py to find the song ID and artist ID based on the title, artist name, and duration of a song.
+# Select the timestamp, user ID, level, song ID, artist ID, session ID, location, and user agent and set to songplay_data
 # FIND SONGS
 
 song_select = ("""
+                SELECT s.song_id, a.artist_id FROM songs as s 
+                LEFT JOIN artists as a
+                ON s.artist_id=a.artist_id
+                WHERE
+                    s.title=(%s) AND
+                    a.name=(%s) AND
+                    s.duration=(%s)
 """)
 
 # QUERY LISTS
