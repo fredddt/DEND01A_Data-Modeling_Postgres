@@ -75,7 +75,7 @@ def process_data(cur, conn, filepath, func):
         cur (psycopg2.cursor()): Cursor to the sparkify database.
         conn (psycopg2.connect()): Connection to the sparkify database.
         filepath (str): Filepath to log-file or song-file folder.
-        func ([function]): Function to be exectuted on each file (here either process_log_file() or process_song_file())
+        func (Python function): Function to be exectuted on each file (here either process_log_file() or process_song_file()).
     """
     # get all files matching extension from directory
     all_files = []
@@ -96,6 +96,8 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
+    """Connects to db, and processes all song- and log-files in the 'data' directory and inserts into sparkifydb.
+    """
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
