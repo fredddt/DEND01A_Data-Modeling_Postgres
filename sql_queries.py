@@ -83,6 +83,8 @@ time_table_insert = ("""INSERT INTO time (start_time, hour, day, week, month, ye
                                 ON CONFLICT (start_time) DO NOTHING
 """)
 
+# Implement the song_select query in sql_queries.py to find the song ID and artist ID based on the title, artist name, and duration of a song.
+# Select the timestamp, user ID, level, song ID, artist ID, session ID, location, and user agent and set to songplay_data
 # FIND SONGS
 
 song_select = ("""
